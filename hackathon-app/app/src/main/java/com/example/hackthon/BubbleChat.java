@@ -3,13 +3,17 @@ import android.text.format.Time;
 
 import java.util.Calendar;
 
+
 public class BubbleChat {
+    boolean userMessage;
     String message;
     Time time_of_message;
-    BubbleChat(String message){
+
+    BubbleChat(String message, boolean userMessage){
         this.message = message;
         time_of_message = new Time();
         time_of_message.setToNow();
+        this.userMessage = userMessage;
     }
 
     String getMessage(){
@@ -17,7 +21,12 @@ public class BubbleChat {
     }
 
     Time getTime(){
-        return this.time_of_message;}
+        return this.time_of_message;
+    }
+
+    boolean getUserWriter(){
+        return this.userMessage;
+    }
 }
 
 
