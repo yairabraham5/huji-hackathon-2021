@@ -15,6 +15,7 @@ public class ChatActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     BubbleAdapter bubbleAdapter;
     ChatMessagesHolder chatMessagesHolder;
+    BotMessenger botMessenger;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +23,7 @@ public class ChatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat);
         recyclerView = findViewById(R.id.recycler_chat);
         bubbleAdapter = new BubbleAdapter();
+        botMessenger = new BotMessenger();
         chatMessagesHolder = new ChatMessagesHolderImp();
         bubbleAdapter.setChatMessagesHolder(chatMessagesHolder);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -33,7 +35,11 @@ public class ChatActivity extends AppCompatActivity {
             if(length != 0){
                 //TODO call amitsour model
                 chatMessagesHolder.addChat(editText.getText().toString(), true);
+
+                bubbleAdapter.notifyDataSetChanged();
+                botMessenger.setUserMessage(editText.getText().toString());
                 editText.setText("");
+                chatMessagesHolder.addChat(botMessenger.responseMessage(), false);
                 bubbleAdapter.notifyDataSetChanged();
             }
 

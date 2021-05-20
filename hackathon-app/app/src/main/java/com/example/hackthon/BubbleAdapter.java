@@ -59,4 +59,13 @@ public class BubbleAdapter extends RecyclerView.Adapter {
     public int getItemCount() {
         return chatMessagesHolder.getChat().size();
     }
+
+    @Override
+    public int getItemViewType(int position) {
+        BubbleChat bubbleChat = chatMessagesHolder.getChat().get(position);
+        if(bubbleChat.getUserWriter()){
+            return 1;
+        }
+        return 2;
+    }
 }
